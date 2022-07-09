@@ -5,7 +5,10 @@
   "dependencies": {
     "@emotion/react": "^11.9.3",
     "@emotion/styled": "^11.9.3",
+<<<<<<< HEAD:package.json
     "@mui/icons-material": "^5.8.4",
+=======
+>>>>>>> 62bf63a (Add structure into the files):Frontend/package.json
     "@mui/material": "^5.8.7",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.3.0",
