@@ -19,7 +19,7 @@ import {
 import React, { useState, useEffect, useContext, createContext } from "react";
 import {getDatabase ,ref, set} from "firebase/database"
 
-import { config as firebaseConfig } from "./config";
+import firebaseConfig from "./config";
 
 // Code edited from https://usehooks.com/useAuth/ and
 // https://firebase.google.com/docs/auth/web/start#add-initialize-sdk
@@ -66,21 +66,21 @@ function useProvideAuth() {
     );
 
   };
-  const registerWithEmailAndPassword = async (fullname, username, password) => {
-   const database = getDatabase(app);
+  const registerWithEmailAndPassword = async (firstname, lastname, username, password,location, contact, patientname,patientnumber) => {
+  
     try {
       const auth = getAuth(app);
       const res = await createUserWithEmailAndPassword(
         auth,
         username,
-        password
+        password,
       );
       const user = res.user;
      await addDoc(collection(db, "users"), {
         uid: user.uid,
-        fullname,
-        authProvider: "local",
-        username,
+        firstname,
+ lastname,
+        username,location, contact, patientname,patientnumber,authProvider: "local"
       });
       /*set(ref(database, 'employers/' + fullname), {
        

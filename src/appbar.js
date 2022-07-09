@@ -16,10 +16,14 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import HowToRegIcon from '@mui/icons-material/HowToReg';
+import VolunteerActivismIcon from '@mui/icons-material/VolunteerActivism';
+import SettingsIcon from '@mui/icons-material/Settings';
+import { Button } from '@mui/material';
+import { useAuth } from './useAuth';
 
-const drawerWidth = 240;
+const drawerWidth = 300;
 
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
   ({ theme, open }) => ({
@@ -69,7 +73,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 export default function PersistentDrawerLeft() {
   const theme = useTheme();
   const [open, setOpen] = React.useState(true);
-
+  const { signOutWithGoogle } = useAuth();
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -82,7 +86,7 @@ export default function PersistentDrawerLeft() {
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
       <AppBar position="fixed" open={open}>
-        <Toolbar>
+        <Toolbar color="green">
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -95,6 +99,9 @@ export default function PersistentDrawerLeft() {
           <Typography variant="h6" noWrap component="div">
             Persistent drawer
           </Typography>
+         <Button sx={{lm:300}} onClick={signOutWithGoogle} color="inherit">
+              sign out
+            </Button>
         </Toolbar>
       </AppBar>
       <Drawer
@@ -117,11 +124,21 @@ export default function PersistentDrawerLeft() {
         </DrawerHeader>
         <Divider />
         <List>
-          {['Report missing patient', 'Register for Events'].map((text, index) => (
+          {['Missing Patient', 'Register for Events'].map((text, index) => (
             <ListItem key={text} disablePadding>
               <ListItemButton>
                 <ListItemIcon>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                  {index % 2 === 0 ? <AccountCircleIcon /> : < HowToRegIcon/>}
+                </ListItemIcon>
+                <ListItemText primary={text} />
+              </ListItemButton>
+            </ListItem>
+          ))}
+           {['Donations','Settings'].map((text, index) => (
+            <ListItem key={text} disablePadding>
+              <ListItemButton>
+                <ListItemIcon>
+                  {index % 2 === 0 ? <VolunteerActivismIcon /> : < SettingsIcon />}
                 </ListItemIcon>
                 <ListItemText primary={text} />
               </ListItemButton>

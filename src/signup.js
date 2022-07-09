@@ -26,7 +26,7 @@ import {
 
 const theme = createTheme();
 const Submit = () => {
-  //const { registerWithEmailAndPassword } = useAuth();
+  const { registerWithEmailAndPassword } = useAuth();
   //const { signInWithGoogle } = useAuth();
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -62,7 +62,7 @@ else if (username==="") {
    
     else{
     
-  /* await registerWithEmailAndPassword(firstName+" "+lastName, username, password)
+   await registerWithEmailAndPassword(firstName,lastName, username, password,location, contact, patientname,patientnumber)
       .then((userAuth) => {
         // Update the newly created user with a display name and a picture
         updateProfile(userAuth.user, {
@@ -75,7 +75,7 @@ else if (username==="") {
       })
       .catch((err) => {
         alert(err);
-      });*/
+      });
   // navigate("/");
     
     
@@ -88,7 +88,7 @@ else if (username==="") {
   return (
     <div 
     style={{ 
-      backgroundImage: `url(https://lh3.googleusercontent.com/E-QN3KcK41c8MrYS-AabtEEOW8GDaJIgsGvMny03oLIJ20-uyRq-p77i_7b3YOlKysxQo4p_qLjCL4u9E5KYDZFVioU58xavY5GPfuXOye_K3FEd-N3oPsQWcjyi6hmssWIDUd2C-XOuDp2BIk_Gldp6YayTkwfy6kEpFX3Rbf2Qoli0JI2muvHInBnCcepriGYkG841G69BprT1rwH2oDBIzpXrHxPz0Nel52JvfxW-wB11MJ8i99SJBBbFKJyiTCqknMCfcQo4pInrWXiXuyX9rus99_ddr5iPNfku0NP77cwRH8rveInO49kAJJt7gdMu0zsa739heYInhjAzHrzkrG-tqRgv-dOUl-rbplyHM6ZfDbIzKbFJIPoc38r5k-kx9dGc9xx8hBai2ttufFeMhE72LG6zmgpvtuqa9BCBSUZo312xFjV8KPjRlCF3mA95TmgHvLnlO_WBIEZhreyhgHUTeoia-T9c5obW5C2-mvd1hMoEjU3RUB4XBkH9KvdXlSx27k-ucVAMU8FNeMPcO0Cy1RLeql7ieyHv2KwqV-e-tkbFdAbxXjNeqJGX8GBcfa3AUahdC1h9SK2ghKE65teLQf1uQxcxxNKsDm07pIm8HqCfpD9sBWHScIj4waVVVId_5Rb1AHORz9U0QQGmuG_EsxGWQ0jwFp7X2AY4jsLYUYgxjaGyJ7TeROb-Mn69u2kurh3wAX9mRwDuecvWvrGRgjXN8ocIeXOFl3RztZ6ozoHevFDP6i2g4g=w1495-h940-no?authuser=0)` }}>
+      backgroundImage: `url(https://lh3.googleusercontent.com/9RA9SLzv7IiuVzNka6Wv6mWw4E8sCCVTC7cN7LBk_vmYK6qAmA0Sh3uY8H1gl-hO5LLt--wk2YQXqcdAKSCs-AMrNnYgM5ArxJqi0V3c7V28NZXLu1s47G3iy0f2wCnRagZpB6cDFnrQrKElPBVpBiG8uv-EUtfXdLN6D6aefWY3J22E9BScRr8qKyKakkuvJbVDlAnwKFmq3JYxUNVTbYds0T9F3Ol8NZDU6J-4OzecgMIzrqNWB5yACTdj6YALQG3oRA-O-24FRMQCnyXFUs8ocx8ZkmcUpqYMPSdNaGE0aZ5fPKrukohksb40AbuCR8xqOeZ2vhfSgwzuo_qixayhT-u_v8atsfmlnfDiGrVgIZITZk2IZBrpY5Z01DBH2LMZsvOhurNsu-mm5j8U6EgATsn_kV1Zi0bh4L-HyCshbXI1B-8uHarPYUGT_ZEGRX1BNcpsTSBv_948DZzkz5qyh_SfK26GfoXAcaEorEjWsMbqn0coIylZEo7AWg2wsmVfoL4PoDkozeFThn-metStGoxU7c13U-s7UHFanEFtHzTfmQusPR4A-zw2YH-Ajxqy6feofHIq3TLKTMrL5h4Y6ruLYg9OtLaIcrg4-dRExwc3wlF-45DJMbhApSUCI3o0XcgnYCSGTB8rhg54FzduMrw_A633ZVwawuy-E4Gyz07O_Q-KMcAghAkGuzK6XkAoBQ8ai4qf2LVWJTvgde-4q870vTafXnPlZSN3ZIxUkJIIjOyF_6iDVYGRHQ=w1593-h940-no?authuser=0)` }}>
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
