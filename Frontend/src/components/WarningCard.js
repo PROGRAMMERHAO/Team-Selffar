@@ -9,9 +9,15 @@ const generateText = (name, direction) => {
   return `Leave ${name} somewhere safe.`;
 };
 
-const WarningCardButton = ({ name, direction }) => {
+const WarningCardButton = ({ name, direction, actions }) => {
   return (
-    <Button color='primary' fullWidth={true} size='medium' variant='outlined'>
+    <Button
+      color='primary'
+      fullWidth={true}
+      size='medium'
+      variant='outlined'
+      onClick={actions}
+    >
       {generateText(name, direction)}
     </Button>
   );
