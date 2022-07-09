@@ -53,7 +53,11 @@ const user = {
     },[])
     return (
        
-        <div>
+        <div 
+        style={
+            {  position:"absolute",
+                left:"250px"}
+        }>
         <h2 style={{paddingTop:"-10px"}}>What's Happening</h2>
        
         <Grid
