@@ -39,6 +39,10 @@ export function Signin() {
   
 
   return (
+    <div style={{ 
+      height: 800,
+      backgroundSize: 'cover',
+      backgroundImage: `url(https://lh3.googleusercontent.com/7Mj8GxJriwbThmO4rN7JIb4N3KQLXhYuPYr58Js-7cV0h3TFRmmxjZbRg4ZQ1ZAvhUT8zCUvlI85tLSwNyYZldiiTAoSxCxd7sUo9SOF2z5z8NSbNNS7OTAVTOOC8TR9a_g-sCNqcZHLTLoCxizAOk7_dGbvbdMzywJ7dbjydi8rx1hvv1mnVpK7tmh9SD7VqA21IPC4v2R2jHnBnmyBNUmuwywCbV4irOLepDcEYqRo6DBOfhukuASdcRuPqFdUD7Qeksx-CmFNmohFVSYkkEeuRk0S6ZIAsV2m5uxKMImGRocA5U_U2NFY0mbLuLDm-d8X5EGbolEwqejKx-JjJUMFvZRu47DVo-ZY2WT2J07SpAjDyOYp3g02vhNEUOtTpbQuPARb93gH45O-ndoUVkrXJELErQBdBNhO_2C57V2mKCf5UKsLCtiI20wF1u7VjNzAHGH62ArSYwK7ZD4RdtTfAa52U-xj9mQwsPT3kW-sQpIziWSpAXNOOJfpjmrLPEPm5PMc7pBT4JBKdgb-X_5IzALHPhvp3iugQmh-C_GKGuakj3-ZFCil_51cMVkD8awCcSTx-nYfK-sgIUaRARpndnnY0o32ZkYDYN8UDmIOuErmeoJFEvAyPlrblgCWXVDCPPcwOtxAqU7g96CkC8v0JPWbCzU-SWCxW6R5L_V_cpZZ2h3GiZg1ClqzosuBzHS4J8Z8DKaw5KyGf52kgKPOWo82VI8NCrRpjw8xbmII06DcaccYRtNvfWQNXg=w1734-h925-no?authuser=0)` }}>
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
@@ -100,9 +104,12 @@ export function Signin() {
             </Grid>
           </Box>
         </Box>
-        <Button onClick={()=>navigate("/signup")}>Register</Button>
+        <Button onClick={()=>navigate("/signup")}>Caregiver Register</Button>
+        <Button onClick={()=>navigate("/patientsignup")}>Patient Register</Button>
+        
       </Container>
     </ThemeProvider>
+    </div>
     
   );
 }

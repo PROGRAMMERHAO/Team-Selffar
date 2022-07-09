@@ -76,11 +76,42 @@ function useProvideAuth() {
         password,
       );
       const user = res.user;
+     await addDoc(collection(db, "patients"), {
+        uid: user.uid,
+        firstname,
+       lastname,
+        username,location, contact, patientname,patientnumber,authProvider: "local"
+      });
+      /*set(ref(database, 'employers/' + fullname), {
+       
+      });*/
+      /*db.collection("employers").doc(fullname).set({
+        uid: user.uid,
+        email: username,
+        fullname: fullname,
+        authProvider:"local"
+      })*/
+    } catch (err) {
+      console.error(err);
+      alert(err.message);
+    }
+  };
+
+  const PatientRegister = async (firstname, lastname, username, password, location, contact) => {
+  
+    try {
+      const auth = getAuth(app);
+      const res = await createUserWithEmailAndPassword(
+        auth,
+        username,
+        password,
+      );
+      const user = res.user;
      await addDoc(collection(db, "users"), {
         uid: user.uid,
         firstname,
- lastname,
-        username,location, contact, patientname,patientnumber,authProvider: "local"
+       lastname,
+        username,location, contact,authProvider: "local"
       });
       /*set(ref(database, 'employers/' + fullname), {
        
@@ -198,5 +229,6 @@ function useProvideAuth() {
     confirmPasswordReset,
     signInWithGoogle,
     registerWithEmailAndPassword,
+    PatientRegister
   };
 }
