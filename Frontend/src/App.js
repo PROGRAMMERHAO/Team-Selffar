@@ -1,11 +1,10 @@
-import './App.css';
-
-
+import "./App.css";
+import WarningCard from "./components/WarningCard";
 
 function App() {
   return (
-    <div className="App">
-     
+    <div className='App'>
+      <WarningCard />
     </div>
   );
 }
