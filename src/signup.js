@@ -12,6 +12,8 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
+import IconButton from '@mui/material/IconButton';
+import SearchIcon from '@mui/icons-material/Search';
 
 //import { useAuthState } from "react-firebase-hooks/auth";
 import {
@@ -31,6 +33,7 @@ const Submit = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [location, setLocation] = useState("");
+  const [address, setAddress] = useState("");
   const [contact, setContact] = useState("");
   const [patientname, setPatientname] = useState("")
   const [patientnumber, setPatientnumber] = useState("")
@@ -38,6 +41,7 @@ const Submit = () => {
   const [loginerror, setError] = useState("");
   const [password, setPassword] = useState(null);
   const [retypepassword, setRetypepassword] = useState(null);
+  const [postalCodeErr, setPostalCodeErr] = useState();
 
   //let navigate = useNavigate();
   // const register = (e) => {
@@ -51,38 +55,53 @@ const Submit = () => {
    
     if (firstName==="") {
       return alert("Please enter a full name");
-    }
- 
-else if (username==="") {
-  alert("please enter an email")
-}
-    else if(password!==retypepassword) {
+    } else if (username==="") {
+      alert("please enter an email")
+    } else if (password!==retypepassword) {
       alert("passwords do not match")
-    }
-   
-    else{
-    
-   await registerWithEmailAndPassword(firstName,lastName, username, password,location, contact, patientname,patientnumber)
-      .then((userAuth) => {
-        // Update the newly created user with a display name and a picture
-        updateProfile(userAuth.user, {
-          displayName: firstName+" "+lastName,
+    } else if (!address) {
+      alert("Please ensure you have entered a correct postal code and populated the address")
+    } else {
+    await registerWithEmailAndPassword(firstName, lastName, username, password, address, location, contact, patientname, patientnumber)
+        .then((userAuth) => {
+          // Update the newly created user with a display name and a picture
+          updateProfile(userAuth.user, {
+            displayName: firstName+" "+lastName,
+          })
+            .catch((error) => {
+              console.log(error);
+              setError(error);
+            });
         })
-          .catch((error) => {
-            console.log(error);
-            setError(error);
-          });
-      })
-      .catch((err) => {
-        alert(err);
-      });
-  // navigate("/");
-    
-    
-    }
-    
+        .catch((err) => {
+          alert(err);
+        });
+    // navigate("/");
+      
+      
+      }
+      
+    };
+  
+
+  const validatePostalCode = () => {
+      var regex = new RegExp("[0-9]{6}");
+      if (regex.test(location)) {
+          console.log(location);
+          // 6 digit number, query api to check if actual postal code and get address
+          fetch(`https://geocode.search.hereapi.com/v1/geocode?qq=postalCode=`
+                  +`${location};country=Singapore&`
+                  +`&apiKey=${process.env.REACT_APP_HERE_API_KEY}`)
+              .then((res) => res.json())
+              .then((data) => {
+                  if(data.items[0]) setAddress(data.items[0].title);
+                  else setPostalCodeErr("Sorry! Couldn't find this postal code.");
+              });            
+      } else {
+        console.log("ERROR!");
+        setPostalCodeErr("Invalid Postal Code (Should be 6 digits!)");
+      }
   };
-    
   
 
   return (
@@ -143,18 +162,39 @@ else if (username==="") {
               onChange={(e) => setName(e.target.value)}
             />
 
-           <TextField
-              value={location}
-              margin="normal"
-              required
-              fullWidth
-              id="location"
-              label="Meeting Location"
-              name="location"
-              autoComplete="location"
-              autoFocus
-              onChange={(e) => setLocation(e.target.value)}
-            />
+            <div style={{display:"flex", width: "111%", flexDirection: "row", justifySelf: "center", alignSelf: "center"}}>
+              <div style={{paddingRight: "5px", alignSelf: "center"}}>
+                <TextField
+                  value={address}
+                  id="address"
+                  multiline
+                  rows={4}
+                  label={"Home Address"}
+                  margin="normal"
+                  autoFocus
+                />
+              </div>
+
+              <div style={{ alignSelf: "center", alignItems: "center", display: "flex" }}>
+                <TextField
+                      value={location}
+                      required
+                      id="location"
+                      label="Postal Code"
+                      name="location"
+                      autoFocus
+                      onChange={(e) => setLocation(e.target.value)}
+                      error={postalCodeErr}
+                      helperText={postalCodeErr}
+                      margin="normal"
+                />
+                <IconButton aria-label="search" style={{paddingTop: "10px", paddingLeft:"10px"}} onClick={() => validatePostalCode()}>
+                  <SearchIcon />
+                </IconButton>
+              </div>
+            </div>
+
+
              <TextField
               value={contact}
               margin="normal"
